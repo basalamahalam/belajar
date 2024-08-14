@@ -17,7 +17,7 @@ const FormLogin = () => {
         type="password"
         name="password"
       />
-      <Button variant="bg-blue-400">Login</Button>
+      <Button variant="bg-blue-600">Login</Button>
     </form>
   );
 };
