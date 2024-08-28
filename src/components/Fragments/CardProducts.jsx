@@ -13,7 +13,11 @@ const Header = (props) => {
   const { img } = props;
   return (
     <a href={img}>
-      <img src="/products.jpg" alt="product" className="p-8 rounded-t-lg" />
+      <img
+        src={img}
+        alt="product"
+        className="object-cover w-full p-8 rounded-t-lg h-60"
+      />
     </a>
   );
 };
@@ -22,10 +26,10 @@ const Body = (props) => {
   return (
     <div className="h-full px-5 pb-5">
       <a href="">
-        <h1 className="text-xl font-semibold tracking-tight text-white">
-          {name}
+        <h1 className="text-xl font-semibold tracking-tight text-white ">
+          {name.substring(0, 20)} ...
         </h1>
-        <p className="text-sm text-white">{children}</p>
+        <p className="text-sm text-white">{children.substring(0, 100)} ...</p>
       </a>
     </div>
   );
