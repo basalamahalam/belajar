@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import CardProducts from "../components/Fragments/CardProducts";
 import { Button } from "../components/Elements/Button/Button";
 import getProducts from "../services/products.service";
+import { getUsername } from "../services/auth.service";
 
 // const products = [
 //   {
@@ -38,14 +39,23 @@ import getProducts from "../services/products.service";
 //   },
 // ];
 
-const email = localStorage.getItem("email");
 const ProductsPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUsername(getUsername(token));
+    } else {
+      window.location.href = "/login";
+    }
   }, []);
 
   useEffect(() => {
@@ -66,8 +76,7 @@ const ProductsPage = () => {
   }, [cart, products]);
 
   const handleLogout = () => {
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
+    localStorage.removeItem("token");
     window.location.href = "/login";
   };
 
@@ -102,7 +111,7 @@ const ProductsPage = () => {
   return (
     <>
       <div className="flex items-center justify-end h-20 px-10 font-semibold tracking-wide text-white bg-blue-600">
-        {email}
+        {username}
         <Button variant="ml-5 bg-black" onClick={handleLogout}>
           Logout
         </Button>
