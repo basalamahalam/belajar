@@ -23,6 +23,8 @@ const store = configureStore({
   },
 });
 
+console.log("oncreate store: ", store.getState());
+
 store.subscribe(() => {
   console.log("STORE CHANGE: ", store.getState());
 });
