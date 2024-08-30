@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CardProducts from "../components/Fragments/CardProducts";
-import { Button } from "../components/Elements/Button/Button";
 import { getProducts } from "../services/products.service";
 import { useLogin } from "../hooks/useLogin";
 import TableCart from "../components/Fragments/TableCart";
@@ -56,11 +55,6 @@ const ProductsPage = () => {
     });
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  };
-
   // const handleAddtoCart = (id) => {
   //   if (products.length > 0 && cart.find((item) => item.id === id)) {
   //     setCart(
@@ -81,12 +75,6 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-end h-20 px-10 font-semibold tracking-wide text-white bg-blue-600">
-        {username}
-        <Button variant="ml-5 bg-black" onClick={handleLogout}>
-          Logout
-        </Button>
-      </div>
       <div className="flex justify-center p-8">
         <div className="flex flex-wrap w-4/6">
           {products.length > 0 &&
