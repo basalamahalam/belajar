@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardProducts from "../components/Fragments/CardProducts";
 import { getProducts } from "../services/products.service";
-import { useLogin } from "../hooks/useLogin";
 import TableCart from "../components/Fragments/TableCart";
+import Navbar from "../components/Layouts/Navbar";
+import { DarkMode } from "../context/DarkMode";
 
 // const products = [
 //   {
@@ -43,8 +44,7 @@ const ProductsPage = () => {
   // const [cart, setCart] = useState([]);
   // const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-  const username = useLogin();
-
+  const { darkMode, setDarkMode } = useContext(DarkMode);
   // useEffect(() => {
   //   setCart(JSON.parse(localStorage.getItem("cart")) || []);
   // }, []);
@@ -75,7 +75,8 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="flex justify-center p-8">
+      <Navbar />
+      <div className={`flex justify-center p-8 ${darkMode && "bg-slate-800"}`}>
         <div className="flex flex-wrap w-4/6">
           {products.length > 0 &&
             products.map((product) => (

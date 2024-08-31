@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { DarkMode } from "../../context/DarkMode";
 
 const TableCart = (props) => {
   const { products } = props;
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
+  const { darkMode } = useContext(DarkMode);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -28,7 +30,11 @@ const TableCart = (props) => {
   }, [cart]);
 
   return (
-    <table className="w-full text-left table-auto broder-separate border-spacing-x-5">
+    <table
+      className={`w-full text-left table-auto broder-separate border-spacing-x-5 ${
+        darkMode && "text-white"
+      }`}
+    >
       <thead>
         <tr>
           <th>Product</th>
